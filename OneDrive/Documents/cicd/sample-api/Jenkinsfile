@@ -11,19 +11,19 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'npm install'
+                sh 'npm install'
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat 'npm test'
+                sh 'npm test'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t sample-api:latest .'
+                sh 'docker build -t sample-api:latest .'
             }
         }
     }
