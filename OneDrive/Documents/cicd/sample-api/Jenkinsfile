@@ -11,19 +11,25 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                dir('OneDrive/Documents/cicd/sample-api') {
+                    sh 'npm install'
+                }
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'npm test'
+                dir('OneDrive/Documents/cicd/sample-api') {
+                    sh 'npm test'
+                }
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t sample-api:latest .'
+                dir('OneDrive/Documents/cicd/sample-api') {
+                    sh 'docker build -t sample-api:latest .'
+                }
             }
         }
     }
