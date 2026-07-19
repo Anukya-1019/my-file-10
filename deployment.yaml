@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sample-api
+  template:
+    metadata:
+      labels:
+        app: sample-api
+    spec:
+      containers:
+      - name: sample-api
+        image: asia-south1-docker.pkg.dev/project-fbd51434-4f3d-4d37-8f7/sample-api-repo/sample-api:latest
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-api-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: sample-api
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
